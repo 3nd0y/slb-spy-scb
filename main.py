@@ -6,6 +6,7 @@ import signal
 import threading
 import time
 from whatsapp_api_client_python import API
+from sys import platform
 
 ## NOTE this is for Python3, if you use for python 2.7 then will encounter payload type str which can failed in
 ## get_val_modbus function. Python3 serial COM will give output bytes type rather than str
@@ -26,6 +27,11 @@ def sensor_read():
     global PD
     global TI
     global TM
+    comport=''
+    if platform == "win32":
+        comport='COM5'
+    else:
+        comport='/dev/ttyUSB0'
     res = []
     while(1):
         with serial.Serial('COM5', 9600, timeout=1) as ser:

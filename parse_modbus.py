@@ -28,8 +28,6 @@ def get_sensor_min(payload,hint):
 	index = 0
 	looping=0
 	result = []
-	# print('get_sensor_min:', payload)
-	# print('get_sensor_min type:',type(payload))
 	while looping != -1:
 		index=payload.find(hint,index)
 		if(index!=-1):
