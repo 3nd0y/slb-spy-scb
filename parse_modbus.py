@@ -15,13 +15,16 @@ def get_val_modbus(index_array, payload):
 	val_array=[]
 	# print('get_val_modbus:', payload)
 	# print('get_val_modbus type:',type(payload))
-	for i in index_array:
-		val_array.append(payload[i+11]<<8|payload[i+12])	#PI
-		val_array.append(payload[i+13]<<8|payload[i+14])	#PD
-		val_array.append(payload[i+17]<<8|payload[i+18])	#TI
-		val_array.append(payload[i+19]<<8|payload[i+20])	#TM
-		val_array.append(payload[i])						#siteID
-	return val_array
+	try:
+		for i in index_array:
+			val_array.append(payload[i+11]<<8|payload[i+12])	#PI
+			val_array.append(payload[i+13]<<8|payload[i+14])	#PD
+			val_array.append(payload[i+17]<<8|payload[i+18])	#TI
+			val_array.append(payload[i+19]<<8|payload[i+20])	#TM
+			val_array.append(payload[i])						#siteID
+	except IndexError:
+		print(IndexError)
+	return val_array	# return [] if data broken
 
 def get_sensor_min(payload,hint):
 	counter=0
