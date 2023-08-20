@@ -34,7 +34,7 @@ def sensor_read():
         comport='/dev/ttyUSB0'
     res = []
     while(1):
-        with serial.Serial('COM5', 9600, timeout=1) as ser:
+        with serial.Serial(comport, 9600, timeout=1) as ser:
             payload = ser.read(16*32)
             if(len(payload)>1):
                 res=get_val_modbus(get_sensor_min(payload,hint),payload)
